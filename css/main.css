@@ -86,7 +86,6 @@ body {
 button {
     display: grid;
     place-content: center;
-    width: 100%;
     font-size: 1.5rem;
     padding: 0.5rem;
     background-color: whitesmoke;
@@ -101,10 +100,6 @@ button:active {
 
 .function {
     background-color: rgb(235, 235, 235);
-}
-
-.transparency {
-    background-color: rgba(225, 225, 225, 0.6)
 }
 
 .equals {
