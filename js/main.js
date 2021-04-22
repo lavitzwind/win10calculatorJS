@@ -10,10 +10,15 @@ const initApp = () => {
         button.addEventListener('click', (event) => {
 
             const newInput = event.target.textContent;
+            if (newNumberFlag) {
+                currentValueElem.value = newInput;
+                newNumberFlag = false;
+            } else {
                 currentValueElem.value =
                     currentValueElem.value == 0
                         ? newInput
                         : `${currentValueElem.value}${newInput}`;
+            }
         })
     })
 }
