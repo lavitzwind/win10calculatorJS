@@ -38,9 +38,8 @@ const initApp = () => {
             const newOperator = event.target.textContent;
             const currentVal = currentValueElem.value;
             
-
             // need number first
-            if(!itemArray.length && currentVal == 0) return console.log(currentVal);
+            if(!itemArray.length && currentVal == 0) return;
             
             // begin new equation
             if(!itemArray.length) {
@@ -147,7 +146,7 @@ const initApp = () => {
 document.addEventListener("DOMContentLoaded", initApp);
 
 const calculate = (equation, currentValueElem) => {
-    const regex = /(^[/=])|(\s)/g;
+    const regex = /(^[*/=])|(\s)/g;
     equation.replace(regex, '');
     const divByZero = /(\/0)/.test(equation);
     if(divByZero) return currentValueElem.value = 0;
