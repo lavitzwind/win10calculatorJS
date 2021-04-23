@@ -1,4 +1,5 @@
 const initApp = () => {
+    
     const currentValueElem = document.querySelector('.currentvalue');
     const previousValueELem = document.querySelector('.previousvalue');
     let itemArray = [];
@@ -25,25 +26,28 @@ const initApp = () => {
     const opButtons = document.querySelectorAll('.operator');
     opButtons.forEach(button => {
         button.addEventListener('click', (event) => {
-
+            
+    
             // equal sign showing
             if(newNumberFlag) {
                 previousValueELem.textContent = "";
                 itemArray = [];
+                
             }
 
             const newOperator = event.target.textContent;
             const currentVal = currentValueElem.value;
+            
 
             // need number first
-            if(!itemArray.length && currentVal == 0) return;
+            if(!itemArray.length && currentVal == 0) return console.log(currentVal);
             
             // begin new equation
             if(!itemArray.length) {
                 itemArray.push(currentVal, newOperator);
                 previousValueELem.textContent = 
                     `${currentVal}
-                    ${newOperator}`
+                    ${newOperator}`;
                     return newNumberFlag = true;
             }
 
@@ -64,6 +68,7 @@ const initApp = () => {
                 ${equationObj['op']}
                 ${equationObj['num2']}
                 `;
+                console.log(equationString);
 
                 const newValue = calculate(equationString, currentValueElem);
 
@@ -142,7 +147,7 @@ const initApp = () => {
 document.addEventListener("DOMContentLoaded", initApp);
 
 const calculate = (equation, currentValueElem) => {
-    const regex = /(^[*/=])|(\s)/g;
+    const regex = /(^[/=])|(\s)/g;
     equation.replace(regex, '');
     const divByZero = /(\/0)/.test(equation);
     if(divByZero) return currentValueElem.value = 0;
