@@ -1,7 +1,7 @@
 const initApp = () => {
-    
+
     const currentValueElem = document.querySelector('.currentvalue');
-    const previousValueELem = document.querySelector('.previousvalue');
+    const previousValueElem = document.querySelector('.previousvalue');
     let itemArray = [];
     const equationArray = [];
     let newNumberFlag = false;
@@ -26,28 +26,26 @@ const initApp = () => {
     const opButtons = document.querySelectorAll('.operator');
     opButtons.forEach(button => {
         button.addEventListener('click', (event) => {
-            
-    
+
             // equal sign showing
             if(newNumberFlag) {
-                previousValueELem.textContent = "";
+                previousValueElem.textContent = "";
                 itemArray = [];
-                
             }
 
             const newOperator = event.target.textContent;
             const currentVal = currentValueElem.value;
-            
+
             // need number first
             if(!itemArray.length && currentVal == 0) return;
-            
+
             // begin new equation
             if(!itemArray.length) {
                 itemArray.push(currentVal, newOperator);
-                previousValueELem.textContent = 
-                    `${currentVal}
-                    ${newOperator}`;
-                    return newNumberFlag = true;
+                previousValueElem.textContent = `
+                ${currentVal} ${newOperator}
+                `;
+                return newNumberFlag = true;
             }
 
             // complete equation
@@ -61,9 +59,8 @@ const initApp = () => {
                 }
 
                 equationArray.push(equationObj);
-                
-                const equationString = 
-                `
+
+                const equationString = `
                 ${equationObj['num1']}
                 ${equationObj['op']}
                 ${equationObj['num2']}
@@ -72,7 +69,7 @@ const initApp = () => {
 
                 const newValue = calculate(equationString, currentValueElem);
 
-                previousValueELem.textContent = 
+                previousValueElem.textContent = 
                     `${newValue} ${newOperator}`;
 
                 // start new equation
@@ -89,7 +86,7 @@ const initApp = () => {
         let equationObj;
 
         // pressing equals repeatedly
-        if(!itemArray.length && equationArray.length) {
+        if(!itemArray.length && equation.length) {
             const lastEquation = equationArray[equationArray.length -1];
             equationObj = {
                 num1: parseFloat(currentVal),
@@ -97,6 +94,7 @@ const initApp = () => {
                 op: lastEquation.op
             }
         } else if (!itemArray.length) {
+            console.log(currentVal)
             return currentVal;
         } else {
             itemArray.push(currentVal);
@@ -111,10 +109,10 @@ const initApp = () => {
 
         const equationString = 
             `${equationObj['num1']} ${equationObj['op']} ${equationObj['num2']}`;
-        
+
         calculate(equationString, currentValueElem);
 
-        previousValueELem.textContent = `${equationString} =`;
+        previousValueElem.textContent = `${equationString} =`;
 
         newNumberFlag = true;
         itemArray = [];
@@ -126,10 +124,10 @@ const initApp = () => {
         button.addEventListener('click', (event) => {
             currentValueElem.value = 0;
             if(event.target.classList.contains('clear')) {
-                previousValueELem.textContent = '';
+                previousValueElem.textContent = '';
                 itemArray = [];
             }
-        });
+        }); 
     });
 
     const deleteButton = document.querySelector('.delete');
