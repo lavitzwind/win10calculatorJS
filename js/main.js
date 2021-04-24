@@ -61,6 +61,7 @@ const initApp = () => {
                 }
 
                 equationArray.push(equationObj);
+                
                 const equationString = 
                 `
                 ${equationObj['num1']}
